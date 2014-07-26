@@ -1,5 +1,5 @@
 ﻿using System;
-using VLCInterface.Bridge.Internal;
+using VLCInterface.Bridge.Internal.Enumerations;
 
 namespace VLCInterface.Enumerations
 {

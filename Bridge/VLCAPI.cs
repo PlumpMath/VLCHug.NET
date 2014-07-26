@@ -2,16 +2,20 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-using VLCInterface.Bridge.Utils;
+using VLCInterface.Media;
 using VLCInterface.Enumerations;
+
+using VLCInterface.Bridge.Utils;
 using VLCInterface.Bridge.Objects;
 using VLCInterface.Bridge.Internal;
+using VLCInterface.Bridge.Internal.Structures;
+using VLCInterface.Bridge.Internal.Enumerations;
 
 namespace VLCInterface.Bridge
 {
     internal static class VLCAPI
     {
-        #region Core
+        #region [✓] Core
 
         public static VLCInstance New(int ArgC, String[] ArgV)
         {
@@ -66,7 +70,7 @@ namespace VLCInterface.Bridge
 
             public static IntPtr FromFile(IVLCObject Object, IntPtr FileHandle)
             {
-                VLCUnmanaged.libvlc_media_new_fd(Object, FileHandle);
+                return VLCUnmanaged.libvlc_media_new_fd(Object.Handle, FileHandle);
             }
 
             public static IntPtr FromPath(IVLCObject Object, String Path)
@@ -114,7 +118,7 @@ namespace VLCInterface.Bridge
 
                 try
                 {
-                    VLCUnmanaged.libvlc_media_new_as_node(Object, NamePtr);
+                    VLCUnmanaged.libvlc_media_new_as_node(Object.Handle, NamePtr);
                 }
                 finally
                 {
@@ -179,6 +183,63 @@ namespace VLCInterface.Bridge
             public static IntPtr Duplicate(IVLCObject Object)
             {
                 return VLCUnmanaged.libvlc_media_duplicate(Object.Handle);
+            }
+
+            public static String GetMeta(IVLCObject Object, VLCMetaData MetaOption)
+            {
+                var DataPtr = VLCUnmanaged.libvlc_media_get_meta(Object.Handle, (libvlc_meta_t)MetaOption);
+
+                return Transform.ToString(DataPtr);
+            }
+
+            public static void SetMeta(IVLCObject Object, VLCMetaData MetaOption, String Value)
+            {
+                IntPtr ValuePtr = IntPtr.Zero;
+
+                try
+                {
+                    ValuePtr = Transform.ToIntPtr(Value);
+
+                    VLCUnmanaged.libvlc_media_set_meta(Object.Handle, (libvlc_meta_t)MetaOption, ValuePtr);
+                }
+                finally
+                {
+                    Transform.Free(ValuePtr);
+                }
+            }
+
+            public static Boolean SaveMeta(IVLCObject Object)
+            {
+                return VLCUnmanaged.libvlc_media_save_meta(Object.Handle) > 0;
+            }
+
+            public static VLCMediaStats GetStats(IVLCObject Object)
+            {
+                IntPtr StatsPtr = Transform.StructDefToPtr<libvlc_media_stats_t>();
+
+                Boolean Success = VLCUnmanaged.libvlc_media_get_stats(Object.Handle, StatsPtr) > 0;
+
+                if(Success)
+                {
+                    Success = false;
+
+                    libvlc_media_stats_t MediaStats;
+
+                    try
+                    {
+                        MediaStats = Transform.ToStructure<libvlc_media_stats_t>(StatsPtr);
+
+                        Success = true;
+                    }
+                    finally
+                    {
+                        Transform.Free(StatsPtr);
+                    }
+
+                    return (Success) ? new VLCMediaStats(MediaStats) : null;
+                }
+
+                return null;
             }
 
             #endregion

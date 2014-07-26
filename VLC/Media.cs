@@ -6,7 +6,7 @@ using VLCInterface.Enumerations;
 
 namespace VLCInterface
 {
-    public class Media : IDisposable, IVLCObject
+    public class VLCMedia : IDisposable, IVLCObject
     {
         public VLCMediaState State
         {
@@ -36,11 +36,11 @@ namespace VLCInterface
             private set;
         }
 
-        private VLCInstance Parent;
+        private VLCInterface Parent;
 
         private Player Player;
 
-        public Media(VLCInstance VLCInstance, String PlayString, Boolean IsFilePath = false)
+        public VLCMedia(VLCInterface VLCInstance, String PlayString, Boolean IsFilePath = false)
         {
             IsDisposed = false;
 
@@ -91,7 +91,7 @@ namespace VLCInterface
             }
         }
 
-        ~Media()
+        ~VLCMedia()
         {
             Dispose();
         }

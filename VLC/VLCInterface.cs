@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 
 using VLCInterface.Bridge;
+using VLCInterface.Bridge.Objects;
 
 namespace VLCInterface
 {
@@ -32,21 +33,22 @@ namespace VLCInterface
         }
 
         public IntPtr Handle
-        { 
-            get; 
-            private set; 
+        {
+            get { return Instance.Handle; }
         }
 
         #endregion
 
+        private VLCInstance Instance;
+
         #region Initialisation and Disposal
 
-        public VLCInstance()
+        public VLCInterface()
         {
             Init(0, new String[0]);
         }
 
-        public VLCInstance(int ArgC, String[] ArgV)
+        public VLCInterface(int ArgC, String[] ArgV)
         {
             Init(ArgC, ArgV);
         }
@@ -55,7 +57,7 @@ namespace VLCInterface
         {
             IsDisposed = false;
 
-            Handle = VLCAPI.New(ArgC, ArgV);
+            Instance = VLCAPI.New(ArgC, ArgV);
         }
 
         public void Dispose()
@@ -67,7 +69,7 @@ namespace VLCInterface
             }
         }
 
-        ~VLCInstance()
+        ~VLCInterface()
         {
             Dispose();
         }
@@ -81,9 +83,9 @@ namespace VLCInterface
             VLCAPI.SetUserAgent(this, Name, HTTPAgent);
         }
 
-        public Media CreateMedia(String PlayString, Boolean IsFilePath = false)
+        public VLCMedia CreateMedia(String PlayString, Boolean IsFilePath = false)
         {
-            return new Media(this, PlayString, IsFilePath);
+            return new VLCMedia(this, PlayString, IsFilePath);
         }
 
         #endregion

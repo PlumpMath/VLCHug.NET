@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VLCInterface.Bridge.Internal
+namespace VLCInterface.Bridge.Internal.Enumerations
 {
     internal enum libvlc_state_t
     {

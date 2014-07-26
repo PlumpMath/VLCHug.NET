@@ -10,6 +10,11 @@ namespace VLCInterface.Bridge.Utils
             return Marshal.StringToHGlobalAnsi(String);
         }
 
+        public static IntPtr StructDefToPtr<T>()
+        {
+            return Marshal.AllocHGlobal(Marshal.SizeOf(typeof(T)));
+        }
+
         public static String ToString(IntPtr Handle)
         {
             return Marshal.PtrToStringAnsi(Handle);

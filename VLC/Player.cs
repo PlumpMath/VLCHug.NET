@@ -33,9 +33,9 @@ namespace VLCInterface
             get { return VLCAPI.Media.Player.GetState(this); }
         }
 
-        private Media Parent;
+        private VLCMedia Parent;
 
-        public Player(Media Media)
+        public Player(VLCMedia Media)
         {
             IsDisposed = false;
 

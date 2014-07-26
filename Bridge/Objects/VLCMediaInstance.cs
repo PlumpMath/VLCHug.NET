@@ -6,19 +6,19 @@ using VLCInterface.Bridge.Internal.Structures;
 
 namespace VLCInterface.Bridge.Objects
 {
-    class VLCInstance : IVLCObject
+    class VLCMediaInstance : IVLCObject
     {
-        public IntPtr Handle { get; private set; }
+         public IntPtr Handle { get; private set; }
 
-        public libvlc_instance_t Instance 
+        /*public libvlc_media_t Instance 
         {
             get
             {
-                return Transform.ToStructure<libvlc_instance_t>(Handle);
+                return Transform.ToStructure<libvlc_media_t>(Handle);
             }
-        }
+        }*/
 
-        public VLCInstance(IntPtr Handle)
+        public VLCMediaInstance(IntPtr Handle)
         {
             this.Handle = Handle;
         }

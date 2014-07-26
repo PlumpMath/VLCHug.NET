@@ -20,9 +20,9 @@ namespace VLCInterface
             this.Options = Options;
         }
 
-        public VLCInstance CreateInstance()
+        public VLCInterface CreateInstance()
         {
-            return new VLCInstance(Options.Length, Options);
+            return new VLCInterface(Options.Length, Options);
         }
     }
 }
