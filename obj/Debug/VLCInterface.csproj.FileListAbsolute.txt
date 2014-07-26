@@ -1,0 +1,5 @@
+C:\Users\James\Documents\GitHub\soundpigeon\VLCInterface\bin\Debug\VLCInterface.dll
+C:\Users\James\Documents\GitHub\soundpigeon\VLCInterface\bin\Debug\VLCInterface.pdb
+C:\Users\James\Documents\GitHub\soundpigeon\VLCInterface\obj\Debug\VLCInterface.csprojResolveAssemblyReference.cache
+C:\Users\James\Documents\GitHub\soundpigeon\VLCInterface\obj\Debug\VLCInterface.dll
+C:\Users\James\Documents\GitHub\soundpigeon\VLCInterface\obj\Debug\VLCInterface.pdb
