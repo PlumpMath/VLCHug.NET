@@ -8,6 +8,7 @@ using VLCInterface.Enumerations;
 using VLCInterface.Bridge.Utils;
 using VLCInterface.Bridge.Objects;
 using VLCInterface.Bridge.Internal;
+using VLCInterface.Bridge.Interfaces;
 using VLCInterface.Bridge.Internal.Structures;
 using VLCInterface.Bridge.Internal.Enumerations;
 

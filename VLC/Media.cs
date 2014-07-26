@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 using VLCInterface.Bridge;
 using VLCInterface.Enumerations;
+using VLCInterface.Bridge.Interfaces;
 
 namespace VLCInterface
 {

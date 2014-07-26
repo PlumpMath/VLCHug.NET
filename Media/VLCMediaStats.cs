@@ -3,7 +3,7 @@ using VLCInterface.Bridge.Internal.Structures;
 
 namespace VLCInterface.Media
 {
-    public class VLCMediaStats
+    internal class VLCMediaStats
     {
         private libvlc_media_stats_t stats;
 

@@ -45,7 +45,7 @@
     <Compile Include="Bridge\Internal\Enumerations\libvlc_media_options.cs" />
     <Compile Include="Bridge\Internal\Structures\libvlc_media_stats_t.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_playback_mode_t.cs" />
-    <Compile Include="Bridge\IVLCObject.cs" />
+    <Compile Include="Bridge\Interfaces\IVLCObject.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_event_e.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_state_t.cs" />
     <Compile Include="Bridge\Objects\VLCInstance.cs" />

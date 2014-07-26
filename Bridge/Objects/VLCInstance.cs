@@ -2,6 +2,8 @@
 
 using VLCInterface.Bridge.Utils;
 using VLCInterface.Bridge.Internal;
+using VLCInterface.Bridge.Interfaces;
+
 using VLCInterface.Bridge.Internal.Structures;
 
 namespace VLCInterface.Bridge.Objects

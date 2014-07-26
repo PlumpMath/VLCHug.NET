@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VLCInterface.Bridge
+namespace VLCInterface.Bridge.Interfaces
 {
     internal interface IVLCObject
     {

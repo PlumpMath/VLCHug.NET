@@ -3,6 +3,8 @@ using System.Runtime.InteropServices;
 
 using VLCInterface.Bridge;
 using VLCInterface.Bridge.Objects;
+using VLCInterface.Bridge.Interfaces;
+
 
 namespace VLCInterface
 {

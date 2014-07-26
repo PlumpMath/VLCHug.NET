@@ -3,7 +3,7 @@ using VLCInterface.Bridge.Internal.Structures;
 
 namespace VLCInterface.Media
 {
-    public class VLCStatsDemux
+    class VLCStatsDemux
     {
         private libvlc_media_stats_t stats;
 
@@ -29,7 +29,7 @@ namespace VLCInterface.Media
 
         public Int32 Discontinuity
         {
-            get { return stats.i_demux_discontinuity }
+            get { return stats.i_demux_discontinuity; }
         }
     }
 }
