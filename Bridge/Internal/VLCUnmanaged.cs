@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using VLCInterface.Bridge.Internal.Delegates;
 using VLCInterface.Bridge.Internal.Enumerations;
 
 namespace VLCInterface.Bridge.Internal
@@ -42,6 +43,22 @@ namespace VLCInterface.Bridge.Internal
         // libvlc_free
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_free(IntPtr Pointer);
+
+        #endregion
+
+        #region [Todo] Events
+
+        // libvlc_event_attach
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static Int32 libvlc_event_attach(IntPtr EventManager, libvlc_event_e EventType, libvlc_callback_t Callback, IntPtr UserData);
+
+        // libvlc_event_attach
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static void libvlc_event_detach(IntPtr EventManager, libvlc_event_e EventType, libvlc_callback_t Callback, IntPtr UserData);
+
+        // libvlc_event_type_name
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static IntPtr libvlc_event_type_name(libvlc_event_e EventType);
 
         #endregion
 
@@ -188,6 +205,10 @@ namespace VLCInterface.Bridge.Internal
         // libvlc_audio_set_volume
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static int libvlc_audio_set_volume(IntPtr PlayerInstance, Int32 Volume);
+
+        // libvlc_media_player_event_manager
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static IntPtr libvlc_media_player_event_manager(IntPtr MediaInstance);
 
         #endregion
 

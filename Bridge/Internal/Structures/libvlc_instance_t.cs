@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 namespace VLCInterface.Bridge.Internal.Structures
 {
     [StructLayout(LayoutKind.Sequential)]
-
     internal struct libvlc_instance_t
     {
         public IntPtr   p_libvlc_int;

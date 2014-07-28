@@ -3,11 +3,11 @@ using VLCInterface.Bridge.Internal.Structures;
 
 namespace VLCInterface.Media
 {
-    internal class VLCMediaStats
+    public class VLCMediaStats
     {
         private libvlc_media_stats_t stats;
 
-        public VLCMediaStats(libvlc_media_stats_t StatsStruct)
+        internal VLCMediaStats(libvlc_media_stats_t StatsStruct)
         {
             this.stats = StatsStruct;
 

@@ -34,6 +34,14 @@ namespace VLCInterface
             }
         }
 
+        public String LastError
+        {
+            get
+            {
+                return VLCAPI.GetErrorMsg();
+            }
+        }
+
         public IntPtr Handle
         {
             get { return Instance.Handle; }
@@ -50,6 +58,11 @@ namespace VLCInterface
             Init(0, new String[0]);
         }
 
+        public VLCInterface(String[] ArgV)
+        {
+            Init(ArgV.Length, ArgV);
+        }
+
         public VLCInterface(int ArgC, String[] ArgV)
         {
             Init(ArgC, ArgV);
@@ -60,6 +73,11 @@ namespace VLCInterface
             IsDisposed = false;
 
             Instance = VLCAPI.New(ArgC, ArgV);
+
+            if (Instance.Handle.Equals(IntPtr.Zero))
+            {
+                throw new NullReferenceException("Failed to initialise VLC instance!");
+            }
         }
 
         public void Dispose()

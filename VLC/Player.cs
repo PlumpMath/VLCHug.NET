@@ -4,11 +4,12 @@ using System.Runtime.InteropServices;
 using VLCInterface.Bridge;
 using VLCInterface.Enumerations;
 using VLCInterface.Bridge.Interfaces;
+using VLCInterface.Bridge.Objects;
 
 
 namespace VLCInterface
 {
-    class Player : IVLCObject
+    class Player : IVLCObject, IVLCSubscribable
     {
         public Boolean IsDisposed
         {
@@ -37,6 +38,13 @@ namespace VLCInterface
 
         private VLCMedia Parent;
 
+        public IntPtr EventManager
+        {
+            get { return VLCAPI.Media.Player.EventManager(this); }
+        }
+
+        private VLCEventBinding Event;
+
         public Player(VLCMedia Media)
         {
             IsDisposed = false;
@@ -44,6 +52,14 @@ namespace VLCInterface
             Parent = Media;
 
             Handle = VLCAPI.Media.Player.FromMedia(Media);
+
+            Event = new VLCEventBinding(VLCEventType.MediaPlayerEncounteredError);
+            Event.Invoked += (o, u) =>
+            {
+                Console.WriteLine("ERROR: {0}", VLCAPI.GetErrorMsg());
+            };
+
+            VLCAPI.Event.Attach(this, Event);
         }
 
         public Boolean SetVolume(int Volume)

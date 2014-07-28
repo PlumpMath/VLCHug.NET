@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 namespace VLCInterface.Bridge.Internal.Structures
 {
     [StructLayout(LayoutKind.Sequential)]
-
     internal struct libvlc_media_stats_t
     {
         public Int32 i_read_bytes;

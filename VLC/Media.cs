@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
+using VLCInterface.Media;
 using VLCInterface.Bridge;
+using VLCInterface.Bridge.Objects;
 using VLCInterface.Enumerations;
 using VLCInterface.Bridge.Interfaces;
 
 namespace VLCInterface
 {
-    public class VLCMedia : IDisposable, IVLCObject
+    public class VLCMedia : IDisposable, IVLCObject, IVLCSubscribable
     {
         public VLCMediaState State
         {
@@ -37,9 +40,21 @@ namespace VLCInterface
             private set;
         }
 
+        public VLCMediaStats Statistics
+        {
+            get { return VLCAPI.Media.GetStats(this); }
+        }
+
         private VLCInterface Parent;
 
         private Player Player;
+
+        public IntPtr EventManager
+        {
+            get { return VLCAPI.Media.EventManager(this); }
+        }
+
+        private VLCEventBinding Event;
 
         public VLCMedia(VLCInterface VLCInstance, String PlayString, Boolean IsFilePath = false)
         {
@@ -51,6 +66,14 @@ namespace VLCInterface
                 VLCAPI.Media.FromPath(VLCInstance, PlayString) :
                 VLCAPI.Media.FromMRL(VLCInstance, PlayString);
 
+            Event = new VLCEventBinding(VLCEventType.MediaStateChanged);
+            Event.Invoked += (o, u) =>
+            {
+                Console.WriteLine((VLCMediaState)o.media_state_changed.new_state);
+            };
+
+            VLCAPI.Event.Attach(this, Event);
+            
             Player = new Player(this);
         }
 

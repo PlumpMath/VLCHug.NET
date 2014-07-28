@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bridge\Delegates\VLCEventDelegate.cs" />
+    <Compile Include="Bridge\Interfaces\IVLCSubscribable.cs" />
+    <Compile Include="Bridge\Internal\Delegates\libvlc_callback_t.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_meta_t.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_event_t.cs" />
     <Compile Include="Bridge\Internal\Structures\libvlc_instance_t.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_media_options.cs" />
     <Compile Include="Bridge\Internal\Structures\libvlc_media_stats_t.cs" />
@@ -50,6 +54,8 @@
     <Compile Include="Bridge\Internal\Enumerations\libvlc_state_t.cs" />
     <Compile Include="Bridge\Objects\VLCInstance.cs" />
     <Compile Include="Bridge\Objects\VLCMediaInstance.cs" />
+    <Compile Include="Bridge\Objects\VLCEventBinding.cs" />
+    <Compile Include="Enumerations\VLCEventType.cs" />
     <Compile Include="Media\VLCMediaStats.cs" />
     <Compile Include="Bridge\Utils\Transform.cs" />
     <Compile Include="Bridge\VLCAPI.cs" />
@@ -63,7 +69,9 @@
     <Compile Include="VLC\VLCFactory.cs" />
     <Compile Include="VLC\VLCInterface.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\Internal\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
