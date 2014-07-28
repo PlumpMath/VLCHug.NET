@@ -55,6 +55,12 @@
     <Compile Include="Bridge\Objects\VLCInstance.cs" />
     <Compile Include="Bridge\Objects\VLCMediaInstance.cs" />
     <Compile Include="Bridge\Objects\VLCEventBinding.cs" />
+    <Compile Include="Core\EventManager.cs" />
+    <Compile Include="Core\Events\VLCMediaDiscovererEvents.cs" />
+    <Compile Include="Core\Events\VLCMediaEvents.cs" />
+    <Compile Include="Core\Events\VLCMediaListEvents.cs" />
+    <Compile Include="Core\Events\VLCPlayerEvents.cs" />
+    <Compile Include="Core\Events\VLCVlmEvents.cs" />
     <Compile Include="Enumerations\VLCEventType.cs" />
     <Compile Include="Media\VLCMediaStats.cs" />
     <Compile Include="Bridge\Utils\Transform.cs" />
@@ -69,9 +75,7 @@
     <Compile Include="VLC\VLCFactory.cs" />
     <Compile Include="VLC\VLCInterface.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Internal\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

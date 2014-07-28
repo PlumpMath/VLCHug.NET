@@ -54,10 +54,10 @@ namespace VLCInterface
             Handle = VLCAPI.Media.Player.FromMedia(Media);
 
             Event = new VLCEventBinding(VLCEventType.MediaPlayerEncounteredError);
-            Event.Invoked += (o, u) =>
+            Event.SetInvoked((o, u) =>
             {
                 Console.WriteLine("ERROR: {0}", VLCAPI.GetErrorMsg());
-            };
+            });
 
             VLCAPI.Event.Attach(this, Event);
         }

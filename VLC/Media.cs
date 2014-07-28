@@ -67,10 +67,10 @@ namespace VLCInterface
                 VLCAPI.Media.FromMRL(VLCInstance, PlayString);
 
             Event = new VLCEventBinding(VLCEventType.MediaStateChanged);
-            Event.Invoked += (o, u) =>
+            Event.SetInvoked((o, u) =>
             {
                 Console.WriteLine((VLCMediaState)o.media_state_changed.new_state);
-            };
+            });
 
             VLCAPI.Event.Attach(this, Event);
             
