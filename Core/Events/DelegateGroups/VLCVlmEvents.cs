@@ -1,7 +1,7 @@
 ﻿using System;
 using VLCInterface.Enumerations;
 
-namespace VLCInterface.Core.Events
+namespace VLCInterface.Core.Events.DelegateGroups
 {
     internal class VLCVlmEvents
     {
