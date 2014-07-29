@@ -631,145 +631,323 @@ namespace VLCInterface.Bridge.Internal
 
         #endregion
 
-        #region [Check] (X) Player
+        #region [Todo] (✓) Player
 
-        // libvlc_media_player_new
+        /// <summary>
+        /// Create an empty Media Player object
+        /// </summary>
+        /// <param name="VLCInstance">
+        /// The libvlc instance in which the Media Player
+        /// should be created.
+        /// </param>
+        /// <returns>A new media player object, or NULL on error.</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_player_new(IntPtr VLCInstance);
-
-        // libvlc_media_player_new_from_media
+        
+        /// <summary>
+        /// Create a Media Player object from a Media
+        /// </summary>
+        /// <param name="MediaInstance">
+        /// The media. After the player contruction the pointer to the media 
+        /// can be safely destroyed.
+        /// </param>
+        /// <returns>A new media player object, or NULL on error.</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_player_new_from_media(IntPtr MediaInstance);
 
-        // libvlc_media_player_release
+        /// <summary>
+        /// Release a media_player after use
+        /// Decrement the reference count of a media player object. If the
+        /// reference count is 0, then libvlc_media_player_release() will
+        /// release the media player object. If the media player object
+        /// has been released, then it should not be used again.
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player to free</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_player_release(IntPtr PlayerInstance);
 
-        // libvlc_media_player_set_media
+        /// <summary>
+        /// Retain a reference to a media player object. Use
+        /// libvlc_media_player_release() to decrement reference count.
+        /// </summary>
+        /// <param name="PlayerInstance">Media player object</param>
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static void libvlc_media_player_retain(IntPtr PlayerInstance);
+
+        /// <summary>
+        /// Set the media that will be used by the media_player. If any,
+        /// previous media will be released.
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <param name="MediaInstance">
+        /// The Media. Afterwards the pointer to the media 
+        /// can be safely destroyed.
+        /// </param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_player_set_media(IntPtr PlayerInstance, IntPtr MediaInstance);
-
-        // libvlc_media_player_play
+        
+        /// <summary>
+        /// Get the media used by the media_player.
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <returns>
+        /// The media associated with the player instance,
+        /// or NULL if no media is associated
+        /// </returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        public extern static int libvlc_media_player_play(IntPtr PlayerInstance);
+        public extern static IntPtr libvlc_media_player_get_media(IntPtr PlayerInstance);
 
-        // libvlc_media_player_set_pause
+        /// <summary>
+        /// Get the Event Manager from which the media player sends events.
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <returns>The event manager associated with the player instance.</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        public extern static void libvlc_media_player_set_pause(IntPtr PlayerInstance, int DoPause);
+        public extern static IntPtr libvlc_media_player_event_manager(IntPtr PlayerInstance);
 
-        // libvlc_media_player_stop
+        /// <summary>
+        /// Gets the playing state of the player.
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <returns>1 if playing, 0 if not</returns>
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static Int32 libvlc_media_player_is_playing(IntPtr PlayerInstance);
+
+        /// <summary>
+        /// Start the media player.
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <returns>0 if playback started (and was already started), or -1 on error</returns>
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static Int32 libvlc_media_player_play(IntPtr PlayerInstance);
+
+        /// <summary>
+        /// Pause or resume (no effect if there is no media)
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <param name="DoPause">Play/resume if zero, pause if non-zero</param>
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static void libvlc_media_player_set_pause(IntPtr PlayerInstance, Int32 DoPause);
+
+        /// <summary>
+        /// Toggle pause (no effect if there is no media)
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+        public extern static void libvlc_media_player_pause(IntPtr PlayerInstance);
+
+        /// <summary>
+        /// Stop (no effect if there is no media)
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_player_stop(IntPtr PlayerInstance);
 
-        // libvlc_media_player_is_playing
-        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        public extern static int libvlc_media_player_is_playing(IntPtr PlayerInstance);
+        // -FLAG-TODO
+        // (Quite alot of functions to implement)
 
-        // libvlc_media_player_get_state
+        /// <summary>
+        /// Get current movie state
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <see cref="libvlc_state_t"/>
+        /// <returns>The current state of the media player (playing, paused, ...)</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static libvlc_state_t libvlc_media_player_get_state(IntPtr PlayerInstance);
 
-        // libvlc_audio_set_volume
+        /// <summary>
+        /// Set current software audio volume.
+        /// </summary>
+        /// <param name="PlayerInstance">The Media Player</param>
+        /// <param name="Volume">The volume in percents (0 = mute, 100 = 0dB)</param>
+        /// <returns>0 if the volume was set, -1 if it was out of range</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        public extern static int libvlc_audio_set_volume(IntPtr PlayerInstance, Int32 Volume);
-
-        // libvlc_media_player_event_manager
-        [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        public extern static IntPtr libvlc_media_player_event_manager(IntPtr MediaInstance);
+        public extern static Int32 libvlc_audio_set_volume(IntPtr PlayerInstance, Int32 Volume);
 
         #endregion
 
-        #region [Check] (X) List Player
+        #region [✓] (✓) List Player
 
-        // libvlc_media_list_player_new
+        /// <summary>
+        /// Create new Media List Player.
+        /// </summary>
+        /// <param name="VLCInstance">LibVLC instance</param>
+        /// <returns>Media list player instance or NULL on error</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_list_player_new(IntPtr VLCInstance);
 
-        // libvlc_media_list_player_release
+        /// <summary>
+        /// Release a media_list_player after use
+        /// Decrement the reference count of a media player object. If the
+        /// reference count is 0, then libvlc_media_list_player_release() will
+        /// release the media player object. If the media player object
+        /// has been released, then it should not be used again.
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_release(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_retain
+        /// <summary>
+        /// Retain a reference to a media player list object. Use
+        /// libvlc_media_list_player_release() to decrement reference count.
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_retain(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_event_manager
+        /// <summary>
+        /// Return the event manager of this Media List Player.
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <returns>The event manager</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_list_player_event_manager(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_set_media_player
+        /// <summary>
+        /// Replace media player in Media List Player with this instance.
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <param name="PlayerInstance">Media player instance</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_set_media_player(IntPtr ListPlayerInstance, IntPtr PlayerInstance);
 
-        // libvlc_media_list_player_set_media_list
+        /// <summary>
+        /// Set the media list associated with the player
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <param name="MediaList">List of media</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_set_media_list(IntPtr ListPlayerInstance, IntPtr MediaList);
 
-        // libvlc_media_list_player_play
+        /// <summary>
+        /// Play media list
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_play(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_pause
+        /// <summary>
+        /// Toggle pause (or resume) media list
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_pause(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_is_playing
+        /// <summary>
+        /// Is media list playing?
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <returns>1 if playing, 0 if not</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static Int32 libvlc_media_list_player_is_playing(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_get_state
+        /// <summary>
+        /// Get current libvlc_state of media list player
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <returns>libvlc_state_t for media list player</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static libvlc_state_t libvlc_media_list_player_get_state(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_play_item_at_index
+        /// <summary>
+        /// Play media list item at position index
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <param name="Index">Index in media list to play</param>
+        /// <returns>0 upon success -1 if the item wasn't found</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        public extern static int libvlc_media_list_player_play_item_at_index(IntPtr ListPlayerInstance, Int32 Index);
+        public extern static Int32 libvlc_media_list_player_play_item_at_index(IntPtr ListPlayerInstance, Int32 Index);
 
-        // libvlc_media_list_player_play_item
+        /// <summary>
+        /// Play the given media item
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <param name="MediaInstance">The media instance</param>
+        /// <returns>0 upon success, -1 if the media is not part of the media list</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static int libvlc_media_list_player_play_item(IntPtr ListPlayerInstance, IntPtr MediaInstance);
 
-        // libvlc_media_list_player_stop
+        /// <summary>
+        /// Stop playing media list
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_stop(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_next
+        /// <summary>
+        /// Play next item from media list
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <returns>0 upon success -1 if there is no next item</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static Int32 libvlc_media_list_player_next(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_previous
+        /// <summary>
+        /// Play previous item from media list
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <returns>0 upon success -1 if there is no previous item</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static Int32 libvlc_media_list_player_previous(IntPtr ListPlayerInstance);
 
-        // libvlc_media_list_player_set_playback_mode
+        /// <summary>
+        /// Sets the playback mode for the playlist
+        /// </summary>
+        /// <param name="ListPlayerInstance">The List Player Instance</param>
+        /// <param name="Mode">Playback mode specification</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_list_player_set_playback_mode(IntPtr ListPlayerInstance, libvlc_playback_mode_t Mode);
 
         #endregion
 
-        #region [Check] (X) Discoverer
+        #region [✓] (✓) Discoverer
 
-        // libvlc_media_discoverer_new_from_name
+        /// <summary>
+        /// Discover media service by name.
+        /// </summary>
+        /// <param name="VLCInstance">LibVLC instance</param>
+        /// <param name="Name">service name</param>
+        /// <returns>Media discover object or NULL in case of error</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_discoverer_new_from_name(IntPtr VLCInstance, IntPtr Name);
 
-        // libvlc_media_discoverer_release
+        /// <summary>
+        /// Release media discover object. If the reference count reaches 0, then
+        /// the object will be released.
+        /// </summary>
+        /// <param name="DiscoverInstance">Media service discover object</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_discoverer_release(IntPtr DiscoverInstance);
 
-        // libvlc_media_discoverer_localized_name
+        /// <summary>
+        /// Get media service discover object its localized name.
+        /// </summary>
+        /// <param name="DiscoverInstance">Media service discover object</param>
+        /// <returns>Localized name</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_discoverer_localized_name(IntPtr DiscoverInstance);
 
-        // libvlc_media_discoverer_media_list
+        /// <summary>
+        /// Get media service discover media list.
+        /// </summary>
+        /// <param name="DiscoverInstance">Media service discover object</param>
+        /// <returns>List of media items</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_discoverer_media_list(IntPtr DiscoverInstance);
 
-        // libvlc_media_discoverer_event_manager
+        /// <summary>
+        /// Get event manager from media service discover object.
+        /// </summary>
+        /// <param name="DiscoverInstance">Media service discover object</param>
+        /// <returns>Event manager object</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_discoverer_event_manager(IntPtr DiscoverInstance);
 
-        // libvlc_media_discoverer_is_running
+        /// <summary>
+        /// Query if media service discover object is running.
+        /// </summary>
+        /// <param name="DiscoverInstance">Media service discover object</param>
+        /// <returns>Return 1 if running, 0 if not</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static Int32 libvlc_media_discoverer_is_running(IntPtr DiscoverInstance);
 
