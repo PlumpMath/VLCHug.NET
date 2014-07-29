@@ -43,15 +43,26 @@
     <Compile Include="Bridge\Delegates\VLCEventDelegate.cs" />
     <Compile Include="Bridge\Interfaces\IVLCSubscribable.cs" />
     <Compile Include="Bridge\Internal\Delegates\libvlc_callback_t.cs" />
+    <Compile Include="Bridge\Internal\Delegates\libvlc_exit_cb.cs" />
+    <Compile Include="Bridge\Internal\Delegates\libvlc_log_cb.cs" />
+    <Compile Include="Bridge\Internal\Enumerations\libvlc_log_level.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_meta_t.cs" />
+    <Compile Include="Bridge\Internal\Enumerations\libvlc_track_type_t.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_audio_track_t.cs" />
     <Compile Include="Bridge\Internal\Structures\libvlc_event_t.cs" />
     <Compile Include="Bridge\Internal\Structures\libvlc_instance_t.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_media_options.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_log_message_t.cs" />
     <Compile Include="Bridge\Internal\Structures\libvlc_media_stats_t.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_playback_mode_t.cs" />
     <Compile Include="Bridge\Interfaces\IVLCObject.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_event_e.cs" />
     <Compile Include="Bridge\Internal\Enumerations\libvlc_state_t.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_log_t.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_media_track_info_t.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_module_description_t.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_subtitle_track_t.cs" />
+    <Compile Include="Bridge\Internal\Structures\libvlc_video_track_t.cs" />
     <Compile Include="Bridge\Objects\VLCInstance.cs" />
     <Compile Include="Bridge\Objects\VLCMediaInstance.cs" />
     <Compile Include="Bridge\Objects\VLCEventBinding.cs" />
@@ -68,11 +79,11 @@
     <Compile Include="Enumerations\VLCMetaData.cs" />
     <Compile Include="Media\VLCStatsDemux.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VLC\Media.cs" />
+    <Compile Include="DirtyClasses\Media.cs" />
     <Compile Include="Enumerations\VLCMediaState.cs" />
-    <Compile Include="VLC\Player.cs" />
-    <Compile Include="VLC\VLCFactory.cs" />
-    <Compile Include="VLC\VLCInterface.cs" />
+    <Compile Include="DirtyClasses\Player.cs" />
+    <Compile Include="DirtyClasses\VLCFactory.cs" />
+    <Compile Include="DirtyClasses\VLCInterface.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

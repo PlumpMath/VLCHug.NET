@@ -6,9 +6,9 @@ namespace VLCInterface.Bridge.Internal.Structures
     [StructLayout(LayoutKind.Sequential)]
     internal struct libvlc_log_t
     {
-        IntPtr i_object_id;
-        IntPtr psz_object_type;
-        IntPtr psz_module;
-        IntPtr psz_header;
+        public IntPtr i_object_id;
+        public IntPtr psz_object_type;
+        public IntPtr psz_module;
+        public IntPtr psz_header;
     }
 }

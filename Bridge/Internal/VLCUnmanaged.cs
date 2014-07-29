@@ -799,7 +799,7 @@ namespace VLCInterface.Bridge.Internal
 
         #endregion
 
-        #region [✓] (X) Time
+        #region [✓] (✓) Time
 
         /// <summary>
         /// Return the current time as defined by LibVLC. The unit is the microsecond.
