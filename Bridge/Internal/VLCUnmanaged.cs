@@ -1066,6 +1066,76 @@ namespace VLCInterface.Bridge.Internal
                 Boolean Enable,
                 Boolean Loop
             );
+            
+            /// <summary>
+            /// Add a vod, with one input.
+            /// </summary>
+            /// <param name="Instance">The instance</param>
+            /// <param name="Name">The name of the new vod media</param>
+            /// <param name="Input">The input MRL</param>
+            /// <param name="NoOptions">Number of additional options</param>
+            /// <param name="Options">Additional options</param>
+            /// <param name="Enable">Boolean for enabling the new VOD</param>
+            /// <param name="Mux">The muxer of the vod media</param>
+            /// <returns>0 on success, -1 on error</returns>
+            private extern static Int32 libvlc_vlm_add_vod(
+                IntPtr Instance,
+                IntPtr Name,
+                IntPtr Input,
+                int NoOptions,
+                IntPtr Options,
+                Boolean Enable,
+                IntPtr Mux
+            );
+
+            /// <summary>
+            /// Delete a media (VOD or broadcast).
+            /// </summary>
+            /// <param name="Instance">The instance</param>
+            /// <param name="Name">The media to delete</param>
+            /// <returns>0 on success, -1 on error</returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+            private extern static Int32 libvlc_vlm_del_media(IntPtr Instance, IntPtr Name);
+
+            /// <summary>
+            /// Delete a media (VOD or broadcast).
+            /// </summary>
+            /// <param name="Instance">The instance</param>
+            /// <param name="Name">The media to delete</param>
+            /// <returns>0 on success, -1 on error</returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+            private extern static Int32 libvlc_vlm_del_media(IntPtr Instance, IntPtr Name);
+
+            /// <summary>
+            /// Enable or disable a media (VOD or broadcast).
+            /// </summary>
+            /// <param name="Instance">The instance</param>
+            /// <param name="Name">The media to work on</param>
+            /// <param name="Enabled">The new status</param>
+            /// <returns>0 on success, -1 on error</returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+            private extern static Int32 libvlc_vlm_set_enabled(IntPtr Instance, IntPtr Name, Int32 Enabled);
+
+            /// <summary>
+            /// Set the output for a media.
+            /// </summary>
+            /// <param name="Instance">The instance</param>
+            /// <param name="Name">The media to work on</param>
+            /// <param name="Output">The output MRL (the parameter to the "sout" variable)</param>
+            /// <returns>0 on success, -1 on error</returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+            private extern static Int32 libvlc_vlm_set_output(IntPtr Instance, IntPtr Name, IntPtr Output);
+
+            /// <summary>
+            /// Set a media's input MRL. This will delete all existing inputs and
+            /// add the specified one.
+            /// </summary>
+            /// <param name="Instance">The instance</param>
+            /// <param name="Name">The media to work on</param>
+            /// <param name="Input">The input MRL</param>
+            /// <returns>0 on success, -1 on error</returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+            private extern static Int32 libvlc_vlm_set_input(IntPtr Instance, IntPtr Name, IntPtr Input);
 
             /// <summary>
             /// Add a media's input MRL. This will add the specified one.
@@ -1076,6 +1146,26 @@ namespace VLCInterface.Bridge.Internal
             /// <returns>0 on success, -1 on error</returns>
             [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
             private extern static Int32 libvlc_vlm_add_input(IntPtr Instance, IntPtr Name, IntPtr InputMRL);
+     
+            /// <summary>
+            /// Set a media's loop status.
+            /// </summary>
+            /// <param name="Instance">The LibVLC instance</param>
+            /// <param name="Name">The media to work on</param>
+            /// <param name="Loop">The new status</param>
+            /// <returns>0 on success, -1 on error</returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+            private extern static Int32 libvlc_vlm_set_loop(IntPtr Instance, IntPtr Name, Int32 Loop); 
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="Instance"></param>
+            /// <param name="Name"></param>
+            /// <param name="Mux"></param>
+            /// <returns></returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
+            private extern static Int32 libvlc_vlm_set_mux(IntPtr Instance, IntPtr Name, IntPtr Mux);
 
         #endregion
     }
