@@ -2,6 +2,14 @@
 
 namespace VLCInterface.Bridge.Internal.Enumerations
 {
+    /// <summary>
+    /// Event types
+    /// </summary>
+    /// <remarks>
+    /// Append new event types at the end of a category.
+    /// Do not remove, insert or re-order any entry.
+    /// Keep this in sync with lib/event.c:libvlc_event_type_name().
+    /// </remarks>
     internal enum libvlc_event_e
     {
         libvlc_MediaMetaChanged = 0,

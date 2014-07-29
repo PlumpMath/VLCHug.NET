@@ -2,6 +2,9 @@
 
 namespace VLCInterface.Bridge.Internal.Enumerations
 {
+    /// <summary>
+    /// Meta data types
+    /// </summary>
     internal enum libvlc_meta_t
     {
         libvlc_meta_Title,
@@ -27,5 +30,6 @@ namespace VLCInterface.Bridge.Internal.Enumerations
         libvlc_meta_Episode,
         libvlc_meta_ShowName,
         libvlc_meta_Actors
+        /* Add new meta types HERE */
     }
 }

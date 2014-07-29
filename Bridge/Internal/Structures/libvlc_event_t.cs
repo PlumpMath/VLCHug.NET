@@ -4,16 +4,28 @@ using System.Runtime.InteropServices;
 
 namespace VLCInterface.Bridge.Internal.Structures
 {
+    /// <summary>
+    /// A LibVLC event
+    /// </summary>
     [StructLayout(LayoutKind.Explicit)]
     internal struct libvlc_event_t
     {
+        /// <summary>
+        /// Event type
+        /// </summary>
+        /// <see cref="libvlc_event_e"/>
         [FieldOffset(0)]
-        public libvlc_event_e type;
+        public libvlc_event_e type; 
 
+        /// <summary>
+        /// Object emitting the event
+        /// </summary>
         [FieldOffset(4)]
         public IntPtr p_obj;
 
         #region Sub-Parts
+        
+        // Media Descriptor
 
         [FieldOffset(8)]
         public media_meta_changed media_meta_changed;
@@ -35,6 +47,8 @@ namespace VLCInterface.Bridge.Internal.Structures
 
         [FieldOffset(8)]
         public media_subitemtree_added media_subitemtree_added;
+
+        // Media Instance
 
         [FieldOffset(8)]
         public media_player_buffering media_player_buffering;
@@ -60,6 +74,8 @@ namespace VLCInterface.Bridge.Internal.Structures
         [FieldOffset(8)]
         public media_player_vout media_player_vout;
 
+        // Media List
+
         [FieldOffset(8)]
         public media_list_item_added media_list_item_added;
 
@@ -72,14 +88,22 @@ namespace VLCInterface.Bridge.Internal.Structures
         [FieldOffset(8)]
         public media_list_player_next_item_set media_list_player_next_item_set;
 
+        // Snapshot Taken
+
         [FieldOffset(8)]
         public media_player_snapshot_taken media_player_snapshot_taken;
+
+        // Length changed
 
         [FieldOffset(8)]
         public media_player_length_changed media_player_length_changed;
 
+        // VLM Media
+
         [FieldOffset(8)]
         public vlm_media_event vlm_media_event;
+
+        // Extra MediaPlayer
 
         [FieldOffset(8)]
         public media_player_media_changed media_player_media_changed;
