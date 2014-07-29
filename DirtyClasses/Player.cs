@@ -9,7 +9,7 @@ using VLCInterface.Bridge.Objects;
 
 namespace VLCInterface
 {
-    class Player : IVLCObject, IVLCSubscribable
+    class Player : IVLCObject, IVLCSubscribable, IDisposable
     {
         public Boolean IsDisposed
         {
@@ -83,6 +83,7 @@ namespace VLCInterface
             {
                 IsDisposed = true;
                 VLCAPI.Media.Player.Release(this);
+                Event.Dispose();
             }
         }
 

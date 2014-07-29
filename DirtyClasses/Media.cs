@@ -112,6 +112,8 @@ namespace VLCInterface
             {
                 IsDisposed = true;
                 VLCAPI.Media.Release(this);
+                Player.Dispose();
+                Event.Dispose();
             }
         }
 
