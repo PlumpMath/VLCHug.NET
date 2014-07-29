@@ -12,7 +12,7 @@ namespace VLCInterface.Bridge.Internal
     /// </summary>
     /// <remarks>
     /// Parts that are incomplete or or known to need
-    /// review are marked with -FLAG-TODO
+    /// reviewing are marked with -FLAG-TODO
     /// </remarks>
     internal static class VLCUnmanaged
     {
@@ -631,6 +631,10 @@ namespace VLCInterface.Bridge.Internal
 
         #endregion
 
+        /*
+         * Player has quite a lot of functions 
+         * yet to implement
+         */
         #region [Todo] (✓) Player
 
         /// <summary>
@@ -953,25 +957,47 @@ namespace VLCInterface.Bridge.Internal
 
         #endregion
 
-        #region [Check] (X) Library
+        #region [✓] (✓) Library
 
-        // libvlc_media_library_new
+        /// <summary>
+        /// Create an new Media Library object
+        /// </summary>
+        /// <param name="VLCInstance">The LibVLC instance</param>
+        /// <returns>A new object or NULL on error</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_library_new(IntPtr VLCInstance);
 
-        // libvlc_media_library_release
+        /// <summary>
+        /// Release media library object. This functions decrements the
+        /// reference count of the media library object. If it reaches 0,
+        /// then the object will be released.
+        /// </summary>
+        /// <param name="MediaLibInstance">Media library object</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_library_release(IntPtr MediaLibInstance);
 
-        // libvlc_media_library_retain
+        /// <summary>
+        /// Retain a reference to a media library object. This function will
+        /// increment the reference counting for this object. Use
+        /// libvlc_media_library_release() to decrement the reference count.
+        /// </summary>
+        /// <param name="MediaLibInstance">Media library object</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static void libvlc_media_library_retain(IntPtr MediaLibInstance);
 
-        // libvlc_media_library_load
+        /// <summary>
+        /// Load media library.
+        /// </summary>
+        /// <param name="MediaLibInstance">Media library object</param>
+        /// <returns>0 on success, -1 on error</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static Int32 libvlc_media_library_load(IntPtr MediaLibInstance);
 
-        // libvlc_media_library_media_list
+        /// <summary>
+        /// Get media library subitems.
+        /// </summary>
+        /// <param name="MediaLibInstance">Media library object</param>
+        /// <returns>Media list subitems</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr libvlc_media_library_media_list(IntPtr MediaLibInstance);
 
@@ -1003,15 +1029,33 @@ namespace VLCInterface.Bridge.Internal
 
         #endregion
 
-        #region [Todo] (X) VLM
+        /*
+         * VLM also has quite a few functions
+         * yet to implement
+         */
+        #region [Todo] (✓) VLM
 
-        // libvlc_vlm_release
+        /// <summary>
+        /// Release the vlm instance related to the given libvlc_instance_t
+        /// </summary>
+        /// <param name="Instance">The LibVLC instance</param>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
         private extern static void libvlc_vlm_release(IntPtr Instance);
 
-        // libvlc_vlm_add_broadcast
+        /// <summary>
+        /// Add a broadcast, with one input.
+        /// </summary>
+        /// <param name="Instance">The LibVLC instance</param>
+        /// <param name="Name">The name of the new broadcast</param>
+        /// <param name="Input">The input MRL</param>
+        /// <param name="Output">The output MRL (the parameter to the "sout" variable)</param>
+        /// <param name="NoOptions">Number of additional options</param>
+        /// <param name="Options">Additional options</param>
+        /// <param name="Enable">Boolean for enabling the new broadcast</param>
+        /// <param name="Loop">Should this broadcast be played in loop?</param>
+        /// <returns>0 on success, -1 on error</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        private extern static int libvlc_vlm_add_broadcast(
+        private extern static Int32 libvlc_vlm_add_broadcast(
             IntPtr Instance,
             IntPtr Name,
             IntPtr Input,
@@ -1022,9 +1066,15 @@ namespace VLCInterface.Bridge.Internal
             Boolean Loop
         );
 
-        // libvlc_vlm_add_input
+        /// <summary>
+        /// Add a media's input MRL. This will add the specified one.
+        /// </summary>
+        /// <param name="Instance">The LibVLC instance</param>
+        /// <param name="Name">The media to work on</param>
+        /// <param name="InputMRL">The input MRL</param>
+        /// <returns>0 on success, -1 on error</returns>
         [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-        private extern static int libvlc_vlm_add_input(IntPtr Instance, IntPtr Name, IntPtr InputMRL);
+        private extern static Int32 libvlc_vlm_add_input(IntPtr Instance, IntPtr Name, IntPtr InputMRL);
 
         #endregion
     }
