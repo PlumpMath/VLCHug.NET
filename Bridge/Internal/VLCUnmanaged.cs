@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using System.Runtime.InteropServices;
 
 using VLCInterface.Bridge.Internal.Delegates;
@@ -14,7 +15,7 @@ namespace VLCInterface.Bridge.Internal
     /// Parts that are incomplete or or known to need
     /// reviewing are marked with -FLAG-TODO
     /// </remarks>
-    internal static class VLCUnmanaged
+    internal static class NativeMethods
     {
         const String vlclibname     = "libvlc";
 

@@ -23,19 +23,19 @@ namespace VLCInterface.Bridge
         {
             Trace("libvlc_new");
 
-            return new VLCInstance(VLCUnmanaged.libvlc_new(ArgC, ArgV));
+            return new VLCInstance(NativeMethods.libvlc_new(ArgC, ArgV));
         }
 
         public static void Release(IVLCObject Object)
         {
             Trace("libvlc_release");
-            VLCUnmanaged.libvlc_release(Object.Handle);
+            NativeMethods.libvlc_release(Object.Handle);
         }
 
         public static void Free(IVLCObject Object)
         {
             Trace("libvlc_free");
-            VLCUnmanaged.libvlc_free(Object.Handle);
+            NativeMethods.libvlc_free(Object.Handle);
         }
 
         public static void SetUserAgent(IVLCObject Object, String Name, String HTTPAgent)
@@ -45,7 +45,7 @@ namespace VLCInterface.Bridge
             try
             {
                 Trace("libvlc_set_user_agent");
-                VLCUnmanaged.libvlc_set_user_agent(Object.Handle, NamePtr, HTTPAgentPtr);
+                NativeMethods.libvlc_set_user_agent(Object.Handle, NamePtr, HTTPAgentPtr);
             }
             finally
             {
@@ -57,19 +57,19 @@ namespace VLCInterface.Bridge
         public static String GetVersion()
         {
             Trace("libvlc_get_version");
-            return Transform.ToString(VLCUnmanaged.libvlc_get_version());
+            return Transform.ToString(NativeMethods.libvlc_get_version());
         }
 
         public static String GetCompiler()
         {
             Trace("libvlc_get_compiler");
-            return Transform.ToString(VLCUnmanaged.libvlc_get_compiler());
+            return Transform.ToString(NativeMethods.libvlc_get_compiler());
         }
 
         public static String GetErrorMsg()
         {
             Trace("libvlc_errmsg");
-            var ErrorPtr = VLCUnmanaged.libvlc_errmsg();
+            var ErrorPtr = NativeMethods.libvlc_errmsg();
             return Transform.ToString(ErrorPtr);
         }
 
@@ -81,7 +81,7 @@ namespace VLCInterface.Bridge
             {
                 IntPtr UsrData = (UserData.HasValue) ? (IntPtr)UserData : IntPtr.Zero;
 
-                return VLCUnmanaged.libvlc_event_attach(
+                return NativeMethods.libvlc_event_attach(
                     Object.EventManager,
                     (libvlc_event_e)Event,
                     Callback,
@@ -98,7 +98,7 @@ namespace VLCInterface.Bridge
             {
                 IntPtr UsrData = (UserData.HasValue) ? (IntPtr)UserData : IntPtr.Zero;
 
-                VLCUnmanaged.libvlc_event_detach(
+                NativeMethods.libvlc_event_detach(
                     Object.EventManager,
                     (libvlc_event_e)Event,
                     Callback,
@@ -114,7 +114,7 @@ namespace VLCInterface.Bridge
 
             public static String Name(VLCEventType Event)
             {
-                return Transform.ToString(VLCUnmanaged.libvlc_event_type_name((libvlc_event_e) Event));
+                return Transform.ToString(NativeMethods.libvlc_event_type_name((libvlc_event_e) Event));
             }
         }
 
@@ -125,7 +125,7 @@ namespace VLCInterface.Bridge
             public static IntPtr FromFile(IVLCObject Object, IntPtr FileHandle)
             {
                 Trace("libvlc_media_new_fd");
-                return VLCUnmanaged.libvlc_media_new_fd(Object.Handle, FileHandle);
+                return NativeMethods.libvlc_media_new_fd(Object.Handle, FileHandle);
             }
 
             public static IntPtr FromPath(IVLCObject Object, String Path)
@@ -138,7 +138,7 @@ namespace VLCInterface.Bridge
                     PathPtr = Transform.ToIntPtr(Path);
 
                     Trace("libvlc_media_new_path");
-                    MediaPtr = VLCUnmanaged.libvlc_media_new_path(Object.Handle, PathPtr);
+                    MediaPtr = NativeMethods.libvlc_media_new_path(Object.Handle, PathPtr);
                 }
                 finally
                 {
@@ -158,7 +158,7 @@ namespace VLCInterface.Bridge
                     MRLPtr = Transform.ToIntPtr(MRL);
 
                     Trace("libvlc_media_new_location");
-                    MediaPtr = VLCUnmanaged.libvlc_media_new_location(Object.Handle, MRLPtr);
+                    MediaPtr = NativeMethods.libvlc_media_new_location(Object.Handle, MRLPtr);
                 }
                 finally
                 {
@@ -176,7 +176,7 @@ namespace VLCInterface.Bridge
                 try
                 {
                     Trace("libvlc_media_new_as_node");
-                    VLCUnmanaged.libvlc_media_new_as_node(Object.Handle, NamePtr);
+                    NativeMethods.libvlc_media_new_as_node(Object.Handle, NamePtr);
                 }
                 finally
                 {
@@ -195,7 +195,7 @@ namespace VLCInterface.Bridge
                     OptionPtr = Transform.ToIntPtr(Option);
 
                     Trace("libvlc_media_add_option");
-                    VLCUnmanaged.libvlc_media_add_option(Object.Handle, OptionPtr);
+                    NativeMethods.libvlc_media_add_option(Object.Handle, OptionPtr);
                 }
                 finally
                 {
@@ -212,7 +212,7 @@ namespace VLCInterface.Bridge
                     OptionPtr = Transform.ToIntPtr(Option);
 
                     Trace("libvlc_media_add_option");
-                    VLCUnmanaged.libvlc_media_add_option(Object.Handle, OptionPtr);
+                    NativeMethods.libvlc_media_add_option(Object.Handle, OptionPtr);
                 }
                 finally
                 {
@@ -223,37 +223,37 @@ namespace VLCInterface.Bridge
             public static void Retain(IVLCObject Object)
             {
                 Trace("libvlc_media_retain");
-                VLCUnmanaged.libvlc_media_retain(Object.Handle);
+                NativeMethods.libvlc_media_retain(Object.Handle);
             }
 
             public static String GetMRL(IVLCObject Object)
             {
                 Trace("libvlc_media_get_mrl");
-                return Transform.ToString(VLCUnmanaged.libvlc_media_get_mrl(Object.Handle));
+                return Transform.ToString(NativeMethods.libvlc_media_get_mrl(Object.Handle));
             }
 
             public static VLCMediaState GetState(IVLCObject Object)
             {
                 Trace("libvlc_media_get_state");
-                return (VLCMediaState)VLCUnmanaged.libvlc_media_get_state(Object.Handle);
+                return (VLCMediaState)NativeMethods.libvlc_media_get_state(Object.Handle);
             }
 
             public static void Release(IVLCObject Object)
             {
                 Trace("libvlc_media_release");
-                VLCUnmanaged.libvlc_media_release(Object.Handle);
+                NativeMethods.libvlc_media_release(Object.Handle);
             }
 
             public static IntPtr Duplicate(IVLCObject Object)
             {
                 Trace("libvlc_media_duplicate");
-                return VLCUnmanaged.libvlc_media_duplicate(Object.Handle);
+                return NativeMethods.libvlc_media_duplicate(Object.Handle);
             }
 
             public static String GetMeta(IVLCObject Object, VLCMetaData MetaOption)
             {
                 Trace("libvlc_media_get_meta");
-                var DataPtr = VLCUnmanaged.libvlc_media_get_meta(Object.Handle, (libvlc_meta_t)MetaOption);
+                var DataPtr = NativeMethods.libvlc_media_get_meta(Object.Handle, (libvlc_meta_t)MetaOption);
 
                 return Transform.ToString(DataPtr);
             }
@@ -267,7 +267,7 @@ namespace VLCInterface.Bridge
                     ValuePtr = Transform.ToIntPtr(Value);
 
                     Trace("libvlc_media_set_meta");
-                    VLCUnmanaged.libvlc_media_set_meta(Object.Handle, (libvlc_meta_t)MetaOption, ValuePtr);
+                    NativeMethods.libvlc_media_set_meta(Object.Handle, (libvlc_meta_t)MetaOption, ValuePtr);
                 }
                 finally
                 {
@@ -278,7 +278,7 @@ namespace VLCInterface.Bridge
             public static Boolean SaveMeta(IVLCObject Object)
             {
                 Trace("libvlc_media_save_meta");
-                return VLCUnmanaged.libvlc_media_save_meta(Object.Handle) > 0;
+                return NativeMethods.libvlc_media_save_meta(Object.Handle) > 0;
             }
 
             public static VLCMediaStats GetStats(IVLCObject Object)
@@ -293,7 +293,7 @@ namespace VLCInterface.Bridge
 
                 Marshal.StructureToPtr(structs, StatsPtr, false);
 
-                Boolean Success = VLCUnmanaged.libvlc_media_get_stats(Object.Handle, StatsPtr) > 0;
+                Boolean Success = NativeMethods.libvlc_media_get_stats(Object.Handle, StatsPtr) > 0;
 
                 if(Success)
                 {
@@ -320,7 +320,7 @@ namespace VLCInterface.Bridge
 
             public static IntPtr EventManager(IVLCObject Object)
             {
-                return VLCUnmanaged.libvlc_media_event_manager(Object.Handle);
+                return NativeMethods.libvlc_media_event_manager(Object.Handle);
             }
 
             #endregion
@@ -332,48 +332,48 @@ namespace VLCInterface.Bridge
                 public static IntPtr FromMedia(IVLCObject Object)
                 {
                     Trace("libvlc_media_player_new_from_media");
-                    return VLCUnmanaged.libvlc_media_player_new_from_media(Object.Handle);
+                    return NativeMethods.libvlc_media_player_new_from_media(Object.Handle);
                 }
 
                 public static Boolean SetVolume(IVLCObject Object, int Volume)
                 {
                     Trace("libvlc_audio_set_volume");
-                    return VLCUnmanaged.libvlc_audio_set_volume(Object.Handle, Volume) > -1;
+                    return NativeMethods.libvlc_audio_set_volume(Object.Handle, Volume) > -1;
                 }
 
                 public static Boolean Play(IVLCObject Object)
                 {
                     Trace("libvlc_media_player_play");
-                    return VLCUnmanaged.libvlc_media_player_play(Object.Handle) > -1;
+                    return NativeMethods.libvlc_media_player_play(Object.Handle) > -1;
                 }
 
                 public static void Stop(IVLCObject Object)
                 {
                     Trace("libvlc_media_player_stop");
-                    VLCUnmanaged.libvlc_media_player_stop(Object.Handle);
+                    NativeMethods.libvlc_media_player_stop(Object.Handle);
                 }
 
                 public static void Release(IVLCObject Object)
                 {
                     Trace("libvlc_media_player_release");
-                    VLCUnmanaged.libvlc_media_player_release(Object.Handle);
+                    NativeMethods.libvlc_media_player_release(Object.Handle);
                 }
 
                 public static Boolean IsPlaying(IVLCObject Object)
                 {
                     Trace("libvlc_media_player_is_playing");
-                    return VLCUnmanaged.libvlc_media_player_is_playing(Object.Handle) == 1;
+                    return NativeMethods.libvlc_media_player_is_playing(Object.Handle) == 1;
                 }
 
                 public static VLCMediaState GetState(IVLCObject Object)
                 {
                     Trace("libvlc_media_player_get_state");
-                    return (VLCMediaState)VLCUnmanaged.libvlc_media_player_get_state(Object.Handle);
+                    return (VLCMediaState)NativeMethods.libvlc_media_player_get_state(Object.Handle);
                 }
 
                 public static IntPtr EventManager(IVLCObject Object)
                 {
-                    return VLCUnmanaged.libvlc_media_player_event_manager(Object.Handle);
+                    return NativeMethods.libvlc_media_player_event_manager(Object.Handle);
                 }
 
                 #endregion
