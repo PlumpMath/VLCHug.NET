@@ -74,6 +74,8 @@ namespace VLCInterface
 
             Instance = VLCAPI.New(ArgC, ArgV);
 
+            Console.WriteLine("{0} :::::::::::::::::::::::::::::::::::::::: Pointer", Instance.Handle);
+
             if (Instance.Handle.Equals(IntPtr.Zero))
             {
                 throw new NullReferenceException("Failed to initialise VLC instance!");

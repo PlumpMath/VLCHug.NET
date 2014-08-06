@@ -50,7 +50,7 @@ namespace VLCInterface
             IsDisposed = false;
 
             Parent = Media;
-
+            Console.WriteLine("========== MEDIA :: {0}", Media.Source);
             Handle = VLCAPI.Media.Player.FromMedia(Media);
 
             Event = new VLCEventBinding(VLCEventType.MediaPlayerEncounteredError);

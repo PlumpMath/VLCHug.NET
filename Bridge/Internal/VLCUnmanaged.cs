@@ -1078,24 +1078,16 @@ namespace VLCInterface.Bridge.Internal
             /// <param name="Enable">Boolean for enabling the new VOD</param>
             /// <param name="Mux">The muxer of the vod media</param>
             /// <returns>0 on success, -1 on error</returns>
+            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
             private extern static Int32 libvlc_vlm_add_vod(
                 IntPtr Instance,
                 IntPtr Name,
                 IntPtr Input,
                 int NoOptions,
                 IntPtr Options,
-                Boolean Enable,
+                Int32 Enable,
                 IntPtr Mux
             );
-
-            /// <summary>
-            /// Delete a media (VOD or broadcast).
-            /// </summary>
-            /// <param name="Instance">The instance</param>
-            /// <param name="Name">The media to delete</param>
-            /// <returns>0 on success, -1 on error</returns>
-            [DllImport(vlclibname, CallingConvention = CallingConvention.Cdecl)]
-            private extern static Int32 libvlc_vlm_del_media(IntPtr Instance, IntPtr Name);
 
             /// <summary>
             /// Delete a media (VOD or broadcast).

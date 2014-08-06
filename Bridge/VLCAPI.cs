@@ -331,6 +331,10 @@ namespace VLCInterface.Bridge
 
                 public static IntPtr FromMedia(IVLCObject Object)
                 {
+                    if(Object.Handle.Equals(IntPtr.Zero))
+                    {
+
+                    }
                     Trace("libvlc_media_player_new_from_media");
                     return NativeMethods.libvlc_media_player_new_from_media(Object.Handle);
                 }

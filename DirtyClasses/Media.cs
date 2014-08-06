@@ -49,6 +49,8 @@ namespace VLCInterface
 
         private Player Player;
 
+        public String Source { get; private set; }
+
         public IntPtr EventManager
         {
             get { return VLCAPI.Media.EventManager(this); }
@@ -59,6 +61,8 @@ namespace VLCInterface
         public VLCMedia(VLCInterface VLCInstance, String PlayString, Boolean IsFilePath = false)
         {
             IsDisposed = false;
+
+            Source = PlayString;
 
             Parent = VLCInstance;
 
